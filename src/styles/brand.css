@@ -1,0 +1,74 @@
+main {
+	font-family: 'IBM Plex Serif', serif;
+	font-size: 1.1rem;
+	padding: 80px 20px;
+}
+
+h1 {
+	font-family: 'Red Hat Display', sans-serif;
+	font-weight: 900;
+	font-size: 2.2rem;
+	margin: 0;
+	margin-bottom: 12px;
+	text-align: center;
+}
+
+section {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+section.split {
+	display: flex;
+	flex-direction: row;
+	max-width: 1200px;
+	gap: 40px;
+	position: relative;
+	left: 80px;
+}
+
+section.mt {
+	margin-top: 80px;
+}
+
+section > * {
+	flex: 1;
+}
+
+.meta {
+	font-weight: normal;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+h2 {
+	line-height: 1.2;
+	margin: 0;
+}
+
+.meta p {
+	margin: 10px 0;
+}
+
+section.split p:first-child {
+	margin-top: 0;
+}
+
+#ipa {
+	cursor: pointer;
+	color: #d9480f;
+}
+
+@media (max-width: 1400px) {
+	section.split {
+		left: 0;
+	}
+}
+
+@media (max-width: 1200px) {
+	section.split {
+		max-width: 800px;
+		flex-direction: column;
+		gap: 10px;
+	}
+}

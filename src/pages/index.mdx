@@ -1,0 +1,45 @@
+import HomepageLayout from '../components/HomepageLayout.astro'
+import LogoHeading from '../components/LogoHeading.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import Footer from '../components/Footer.astro'
+
+<HomepageLayout>
+	<LogoHeading />
+
+	<div id="projects" class="projects-section">
+		<div class="project-card-wrapper">
+			<ProjectCard
+				title="AI-based Adaptive Traffic Controller"
+				subtitle="ARTIFICIAL INTELLIGENCE"
+				description="Tackling Egypt's traffic congestion using AI and computer vision for real-time adaptive road systems."
+				image="/photos/traffic-controller-project.jpg"
+				link="https://drive.google.com/drive/folders/1zz8WgO6CHJhHHZna57q-9HWLfb84A_Tw?usp=sharing"
+				abstract="Road congestion and traffic-related pollution remain major problems for Egypt. As a result, this project was initiated in purpose of creating an AI-powered Intelligent Road System that can detect congestion in real-time and deal with it. The chosen solution is use a computer vision AI to detect the congestion then apply reversible lanes technique after closuring & clearing the line from cars trough dynamic signs and implement an adaptive traffic-light cycles timing using an optimization algorithm to enhance the flow of traffic. The chosen prototype design is a system uses YOLOv11m for car detection and CNN-Xception for congestion classification, a pollution-monitoring module (MQ-135), and an ESP32-WROVER-E to manage the dynamic signs and traffic light modules. The prototype was built in the fab lab and the online Camber cloud for training models. The final testing showed that the system had a great performance: the traffic waiting time was reduced by 61.9%, the traffic flow was increased by 155%, and the pollution level was reduced from 900 PPM to 420 PPM after the system-intervention. The AI models showed 91.2% and 94.6% accuracy on real-world data and 96.4% and 90% on prototype scenarios, respectively, while system response time was 2590 ms on average, in the cloud. This meets the design requirements which are getting at least 90% system accuracy, reduce pollution by at least 20%, and having a response time less than 5 seconds. To conclude, these findings are in line with the design-objectives of the Intelligent-Road System and indicate that it is a viable, impactful, and scalable solution that can lead to a significant reduction in congestion and pollution in Egyptian cities."
+			/>
+		</div>
+
+		<div class="project-card-wrapper">
+			<ProjectCard
+				title="Tri-aqua Revive System"
+				subtitle="WATER PURIFICATION"
+				description="Addressing water pollution with a multi-stage purification system using reverse osmosis, biosorbents, and activated carbon."
+				image="/photos/tri-aqua-revive-system.jpg"
+				link="https://drive.google.com/drive/folders/1V9fze072pu_q_qgh6TUmIx4yg69xinms?usp=sharing"
+				abstract="Nowadays, Egypt faces numerous challenges, threatening public health and safety. Recycling waste materials reduces the need for raw resources, lowers production costs and offers economic and environmental benefits. Pollution of water, air and soil remains a pressing issue. the pollution of the water causes many diseases like Cholera and Typhoid Fever. Water pollution stems from agricultural runoff, industrial waste, and plastics. With high salinity, microplastics and microorganisms in the water, this poses serious health risks. Addressing these challenges requires innovative solutions to eradicate pollution and improve public health. To purify the water from salinity, microplastics and microorganisms, an integrated system using reverse osmosis membranes, biosorbent, and activated carbon has been developed using the mechanisms of absorption and adsorption and physical separation with a feedback integrated system to allow automation in the purification process. The system was designed to test some requirements to ensure its ability to be applied in real life, such as the capability of purifying water within 5 cycles with managed power consumption and reaching the threshold values of its parameters and being eco-friendly. The results of the tests revealed that the model in use was effective as it could treat the chosen parameters in at least 5 cycles, with the ability to measure the capacity and energy consumption of the prototype to meet the design requirements determined. Therefore, it's concluded that the project is highly efficient and suitable to be applied with low cost compared to other applied solutions. It will also be a warning sign of the imminent occurrence of any danger towards the water, such as contamination, salinity, and the effects of wastes on it."
+			/>
+		</div>
+
+		<div class="project-card-wrapper">
+			<ProjectCard
+				title="Air Clarity Silica System"
+				subtitle="AIR QUALITY"
+				description="Improving air quality through an innovative humidity filtration system using recycled silica gel."
+				image="/photos/air-clarity-silica-system.jpg"
+				link="https://drive.google.com/drive/folders/10YFUAMf42LGs2-ZR5p_5kY7gYjqpPrvQ?usp=sharing"
+				abstract="This project aims to turn locally grown waste materials into useful tools to improve air quality in Egypt and to help in addressing global warming and pollution. The study focuses on creating a filtration system that lowers the concentration air humidity. It is a factor in air pollution, increasing the concentration and consequently decreasing the quality of air. Silica gel is also one of the most accessible and, at the same time, environmentally friendly materials and was used because it can effectively absorb humidity from the air. Plastic pipe, white medical bandages, silica gel, DHT11 humidity sensor with Arduino were used in the prototype. The system be installed with a device that will measure and filter air to decrease its moisture content. Testing involved passing air through the filter and checking for changes in humidity. Results showed that for 800 ml of air, air humidity was reduced by 40%. The process was completed in under 10 minutes, proving the prototype's efficiency and reliability. This study concludes that recycling silica gel offers a sustainable, practical way to improve air quality in Egypt and supports global aims to resist climate change by creating a cleaner environment."
+			/>
+		</div>
+	</div>
+
+	<Footer />
+</HomepageLayout>

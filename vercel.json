@@ -1,0 +1,20 @@
+{
+	"trailingSlash": false,
+	"redirects": [
+		{
+			"source": "/writing/you-in-cpu--delist",
+			"destination": "https://cpu.land/",
+			"permanent": true
+		},
+		{
+			"source": "/writing/putting-the-you-in-cpu",
+			"destination": "https://cpu.land/",
+			"permanent": true
+		},
+		{
+			"source": "/writing/how-did-i-get-here",
+			"destination": "https://how-did-i-get-here.net/",
+			"permanent": true
+		}
+	]
+}

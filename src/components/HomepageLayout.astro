@@ -1,0 +1,254 @@
+---
+import '../styles/global.css'
+import '../styles/homepage.css'
+
+import SEO from '../components/SEO.astro'
+---
+
+<html lang='en'>
+<head>
+	<meta charset='utf-8' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+
+	<link rel='preconnect' href='https://fonts.googleapis.com' />
+	<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+	<link href='https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap' rel='stylesheet' />
+
+	<SEO description='Hello, I&rsquo;m Botros! I&rsquo;m a STEM high school student passionate about solving real-world problems through technology and innovation. Check out my projects on traffic management, water purification, and air quality improvement.' />
+
+	<style>
+		/* Loading Screen */
+		.loading-screen {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #f8f8f8;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			z-index: 9999;
+			transition: opacity 0.6s ease, visibility 0.6s ease;
+		}
+
+		.loading-screen.hidden {
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		.loader-text {
+			font-family: 'Outfit', sans-serif;
+			font-size: 2.5rem;
+			font-weight: 300;
+			letter-spacing: 0.4em;
+			color: #222;
+			margin-bottom: 40px;
+			overflow: hidden;
+		}
+
+		.loader-text span {
+			display: inline-block;
+			animation: letterFloat 1.5s ease-in-out infinite;
+		}
+
+		.loader-text span:nth-child(1) { animation-delay: 0s; }
+		.loader-text span:nth-child(2) { animation-delay: 0.1s; }
+		.loader-text span:nth-child(3) { animation-delay: 0.2s; }
+		.loader-text span:nth-child(4) { animation-delay: 0.3s; }
+		.loader-text span:nth-child(5) { animation-delay: 0.4s; }
+		.loader-text span:nth-child(6) { animation-delay: 0.5s; }
+
+		@keyframes letterFloat {
+			0%, 100% {
+				transform: translateY(0);
+				opacity: 1;
+			}
+			50% {
+				transform: translateY(-15px);
+				opacity: 0.6;
+			}
+		}
+
+		.loader-bar {
+			width: 200px;
+			height: 3px;
+			background: #e0e0e0;
+			border-radius: 3px;
+			overflow: hidden;
+		}
+
+		.loader-progress {
+			width: 0%;
+			height: 100%;
+			background: linear-gradient(90deg, #40e0d0, #48d1cc);
+			border-radius: 3px;
+			animation: loadProgress 1.5s ease-out forwards;
+		}
+
+		@keyframes loadProgress {
+			0% { width: 0%; }
+			50% { width: 70%; }
+			100% { width: 100%; }
+		}
+
+		/* Prevent scrolling while loading */
+		body.loading {
+			overflow: hidden;
+		}
+
+		/* Scroll Animation Classes */
+		.animate-on-scroll {
+			opacity: 0;
+			transform: translateY(40px);
+			transition: opacity 0.8s ease, transform 0.8s ease;
+		}
+
+		.animate-on-scroll.visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		/* Staggered animations */
+		.animate-delay-1 { transition-delay: 0.1s; }
+		.animate-delay-2 { transition-delay: 0.2s; }
+		.animate-delay-3 { transition-delay: 0.3s; }
+
+		/* Fade in from left */
+		.animate-from-left {
+			opacity: 0;
+			transform: translateX(-40px);
+			transition: opacity 0.8s ease, transform 0.8s ease;
+		}
+
+		.animate-from-left.visible {
+			opacity: 1;
+			transform: translateX(0);
+		}
+
+		/* Fade in from right */
+		.animate-from-right {
+			opacity: 0;
+			transform: translateX(40px);
+			transition: opacity 0.8s ease, transform 0.8s ease;
+		}
+
+		.animate-from-right.visible {
+			opacity: 1;
+			transform: translateX(0);
+		}
+
+		/* Scale up animation */
+		.animate-scale {
+			opacity: 0;
+			transform: scale(0.9);
+			transition: opacity 0.6s ease, transform 0.6s ease;
+		}
+
+		.animate-scale.visible {
+			opacity: 1;
+			transform: scale(1);
+		}
+	</style>
+</head>
+<body class="loading">
+	<!-- Loading Screen -->
+	<div class="loading-screen" id="loader">
+		<div class="loader-text">
+			<span>B</span><span>O</span><span>T</span><span>R</span><span>O</span><span>S</span>
+		</div>
+		<div class="loader-bar">
+			<div class="loader-progress"></div>
+		</div>
+	</div>
+
+	<!-- Cyan accent bar at top -->
+	<div class="accent-bar"></div>
+	
+	<main>
+		<slot />
+	</main>
+
+	<!-- Decorative vertical lines -->
+	<div class="decorative-lines">
+		<div class="line line-1"></div>
+		<div class="line line-2"></div>
+		<div class="line line-3"></div>
+		<div class="line line-4"></div>
+	</div>
+
+	<script>
+		// Hide loader when page is ready
+		window.addEventListener('load', () => {
+			const loader = document.getElementById('loader');
+			
+			// Minimum display time for loader (1.5s for the animation to complete)
+			setTimeout(() => {
+				loader.classList.add('hidden');
+				document.body.classList.remove('loading');
+				
+				// Trigger hero animations after loader hides
+				setTimeout(() => {
+					const heroTitle = document.querySelector('.hero-title');
+					const heroDescription = document.querySelector('.hero-description');
+					const heroButtons = document.querySelector('.hero-buttons');
+
+					if (heroTitle) heroTitle.classList.add('visible');
+					setTimeout(() => {
+						if (heroDescription) heroDescription.classList.add('visible');
+					}, 150);
+					setTimeout(() => {
+						if (heroButtons) heroButtons.classList.add('visible');
+					}, 300);
+				}, 300);
+			}, 1600);
+		});
+
+		// Intersection Observer for scroll animations
+		const observerOptions = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.15
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+				}
+			});
+		}, observerOptions);
+
+		// Observe all animated elements
+		document.addEventListener('DOMContentLoaded', () => {
+			// Add animation classes to elements
+			const heroTitle = document.querySelector('.hero-title');
+			const heroDescription = document.querySelector('.hero-description');
+			const heroButtons = document.querySelector('.hero-buttons');
+			const projectCards = document.querySelectorAll('.project-card-wrapper');
+
+			if (heroTitle) {
+				heroTitle.classList.add('animate-on-scroll');
+				observer.observe(heroTitle);
+			}
+
+			if (heroDescription) {
+				heroDescription.classList.add('animate-on-scroll', 'animate-delay-1');
+				observer.observe(heroDescription);
+			}
+
+			if (heroButtons) {
+				heroButtons.classList.add('animate-on-scroll', 'animate-delay-2');
+				observer.observe(heroButtons);
+			}
+
+			projectCards.forEach((card, index) => {
+				card.classList.add('animate-on-scroll');
+				card.style.transitionDelay = `${index * 0.1}s`;
+				observer.observe(card);
+			});
+		});
+	</script>
+</body>
+</html>

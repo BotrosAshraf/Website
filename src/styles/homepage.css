@@ -1,0 +1,91 @@
+/* Accent bar at top */
+.accent-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background: linear-gradient(90deg, #40e0d0, #48d1cc);
+	z-index: 1000;
+}
+
+/* Decorative diagonal lines */
+.decorative-lines {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	z-index: -1;
+	overflow: hidden;
+}
+
+.decorative-lines .line {
+	position: absolute;
+	width: 2px;
+	height: 200%;
+	background: rgba(0, 0, 0, 0.12);
+	transform-origin: top center;
+}
+
+.decorative-lines .line-1 {
+	left: 15%;
+	transform: rotate(25deg);
+}
+
+.decorative-lines .line-2 {
+	left: 35%;
+	transform: rotate(-20deg);
+}
+
+.decorative-lines .line-3 {
+	right: 35%;
+	transform: rotate(20deg);
+}
+
+.decorative-lines .line-4 {
+	right: 15%;
+	transform: rotate(-25deg);
+}
+
+/* Main container */
+main {
+	font-family: 'Outfit', sans-serif;
+	margin: 0 auto;
+	padding: 40px 20px;
+	max-width: 800px;
+	position: relative;
+	background: transparent;
+}
+
+/* Projects Section */
+.projects-section {
+	padding: 0;
+}
+
+.project-card-wrapper {
+	border-top: 1px solid #e5e5e5;
+	padding: 70px 0;
+	display: flex;
+	justify-content: center;
+}
+
+.project-card-wrapper:last-child {
+	padding-bottom: 100px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	main {
+		padding: 30px 15px;
+	}
+
+	.project-card-wrapper {
+		padding: 50px 0;
+	}
+
+	.decorative-lines {
+		display: none;
+	}
+}

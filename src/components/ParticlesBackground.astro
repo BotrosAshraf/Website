@@ -1,0 +1,161 @@
+---
+// Particles Network Background - Pure JavaScript Implementation
+---
+
+<canvas id="particles-canvas"></canvas>
+
+<style>
+	#particles-canvas {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		pointer-events: none;
+		background: linear-gradient(135deg, #0a0f1a 0%, #111827 50%, #0a0f1a 100%);
+	}
+</style>
+
+<script>
+	const canvas = document.getElementById('particles-canvas') as HTMLCanvasElement;
+	const ctx = canvas.getContext('2d')!;
+
+	let particles: Particle[] = [];
+	let mouse = { x: -1000, y: -1000, radius: 150 };
+	let time = 0;
+
+	interface Particle {
+		x: number;
+		y: number;
+		baseX: number;
+		baseY: number;
+		size: number;
+		offsetX: number;
+		offsetY: number;
+	}
+
+	function resize() {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		initParticles();
+	}
+
+	function initParticles() {
+		particles = [];
+		const numberOfParticles = Math.floor((canvas.width * canvas.height) / 8000);
+		
+		for (let i = 0; i < numberOfParticles; i++) {
+			const x = Math.random() * canvas.width;
+			const y = Math.random() * canvas.height;
+			particles.push({
+				x,
+				y,
+				baseX: x,
+				baseY: y,
+				size: Math.random() * 2 + 2,
+				offsetX: Math.random() * Math.PI * 2,
+				offsetY: Math.random() * Math.PI * 2
+			});
+		}
+	}
+
+	function drawParticle(p: Particle) {
+		ctx.beginPath();
+		ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+		ctx.fillStyle = 'rgba(56, 189, 248, 0.8)';
+		ctx.fill();
+	}
+
+	function drawConnections() {
+		for (let i = 0; i < particles.length; i++) {
+			for (let j = i + 1; j < particles.length; j++) {
+				const dx = particles[i].x - particles[j].x;
+				const dy = particles[i].y - particles[j].y;
+				const distance = Math.sqrt(dx * dx + dy * dy);
+
+				if (distance < 120) {
+					const opacity = (1 - distance / 120) * 0.5;
+					ctx.beginPath();
+					ctx.strokeStyle = `rgba(56, 189, 248, ${opacity})`;
+					ctx.lineWidth = 1.5;
+					ctx.moveTo(particles[i].x, particles[i].y);
+					ctx.lineTo(particles[j].x, particles[j].y);
+					ctx.stroke();
+				}
+			}
+		}
+	}
+
+	function drawMouseConnections() {
+		for (const p of particles) {
+			const dx = mouse.x - p.x;
+			const dy = mouse.y - p.y;
+			const distance = Math.sqrt(dx * dx + dy * dy);
+
+			if (distance < mouse.radius) {
+				const opacity = (1 - distance / mouse.radius) * 0.8;
+				ctx.beginPath();
+				ctx.strokeStyle = `rgba(56, 189, 248, ${opacity})`;
+				ctx.lineWidth = 2;
+				ctx.moveTo(p.x, p.y);
+				ctx.lineTo(mouse.x, mouse.y);
+				ctx.stroke();
+			}
+		}
+	}
+
+	function updateParticle(p: Particle) {
+		// Regular floating movement using sine waves (constant speed)
+		const floatX = Math.sin(time * 0.006 + p.offsetX) * 30;
+		const floatY = Math.cos(time * 0.006 + p.offsetY) * 30;
+		
+		// Mouse push effect (affects position only)
+		const dx = mouse.x - (p.baseX + floatX);
+		const dy = mouse.y - (p.baseY + floatY);
+		const distance = Math.sqrt(dx * dx + dy * dy);
+		
+		let pushX = 0;
+		let pushY = 0;
+		
+		if (distance < mouse.radius) {
+			const force = (mouse.radius - distance) / mouse.radius;
+			const angle = Math.atan2(dy, dx);
+			pushX = -Math.cos(angle) * force * 60;
+			pushY = -Math.sin(angle) * force * 60;
+		}
+		
+		p.x = p.baseX + floatX + pushX;
+		p.y = p.baseY + floatY + pushY;
+	}
+
+	function animate() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		time++;
+
+		for (const p of particles) {
+			updateParticle(p);
+			drawParticle(p);
+		}
+
+		drawConnections();
+		drawMouseConnections();
+
+		requestAnimationFrame(animate);
+	}
+
+	window.addEventListener('resize', resize);
+	
+	window.addEventListener('mousemove', (e) => {
+		mouse.x = e.clientX;
+		mouse.y = e.clientY;
+	});
+
+	window.addEventListener('mouseout', () => {
+		mouse.x = -1000;
+		mouse.y = -1000;
+	});
+
+	resize();
+	animate();
+</script>
